@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #4f8cff;
+  --accent-strong: color-mix(in oklab, var(--accent) 82%, white 18%);
+  --accent-fill: color-mix(in oklab, var(--accent) 82%, black 18%);
+  --accent-soft: color-mix(in oklab, var(--accent) 14%, transparent);
+  --accent-glow: color-mix(in oklab, var(--accent) 30%, transparent);
+  --accent-contrast: #07101f;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #07090d;
+  --color-surface: #0d1118;
+  --color-surface-2: #121823;
+  --color-surface-3: #181f2d;
+  --color-border: #202837;
+  --color-border-strong: #344056;
+
+  --color-foreground: #f7f9fc;
+  --color-muted: #a5afc0;
+  --color-muted-2: #707b8e;
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+
+  --shadow-card:
+    0 1px 0 0 rgb(255 255 255 / 0.045) inset,
+    0 18px 50px -30px rgb(0 0 0 / 0.9);
+
+  --shadow-card-hover:
+    0 1px 0 0 rgb(255 255 255 / 0.07) inset,
+    0 25px 70px -35px rgb(0 0 0 / 0.95);
+
+  --shadow-glow:
+    0 0 0 1px var(--accent-soft),
+    0 25px 80px -30px var(--accent-glow);
+
+  --animate-float: float 9s ease-in-out infinite;
+  --animate-float-slow: float 13s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--color-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 5px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-balance;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-border bg-surface shadow-card;
+  }
+
+  .surface-card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-card-hover;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent-strong;
+  }
+
+  .prose-studio {
+    @apply text-muted leading-relaxed;
+  }
+
+  .prose-studio h2 {
+    @apply mt-10 mb-3 text-xl font-semibold text-foreground sm:text-2xl;
+  }
+
+  .prose-studio p {
+    @apply mb-4;
+  }
+
+  .prose-studio ul {
+    @apply mb-4 list-disc space-y-2 pl-5 marker:text-accent;
+  }
+
+  .prose-studio a {
+    @apply text-accent-strong underline decoration-accent/40 underline-offset-4 hover:decoration-accent;
+  }
+
+  .grid-fade {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 0%,
+      black 25%,
+      transparent 100%
+    );
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 0%,
+      black 15%,
+      transparent 80%
+    );
+  }
+
+  .hero-glow {
+    background:
+      radial-gradient(
+        circle at center,
+        color-mix(in oklab, var(--accent) 24%, transparent),
+        transparent 68%
+      );
+  }
+
+  .section-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--accent-soft),
+      transparent
+    );
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-border bg-surface-2 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-foreground;
+  }
+
+  .field-hint {
+    @apply mt-1.5 text-xs text-muted-2;
+  }
+}
