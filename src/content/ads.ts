@@ -3,17 +3,9 @@ import type { AdConfiguration } from "./types";
 /**
  * Per-app advertising authorization (app-ads.txt) configuration.
  *
- * IMPORTANT: publisher IDs are intentionally left EMPTY. Records with an empty
- * publisherId are never written to /app-ads.txt and are shown as
- * "needs configuration" in the admin and on /<slug>/ads-txt/.
- *
- * For Google AdMob the line format is:
- *   google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
- * where "f08c47fec0942fa0" is Google's public certification authority (TAG) ID
- * and pub-XXXXXXXXXXXXXXXX is YOUR publisher ID from the AdMob console.
- *
- * Each app has its own configuration so different apps can use different
- * networks. The root /app-ads.txt is generated from all production sets.
+ * Indian Open World Driving uses Google AdMob.
+ * The publisher ID below is the AdMob publisher ID associated with
+ * this app and is published through the root /app-ads.txt endpoint.
  */
 export const adConfigurations: AdConfiguration[] = [
   {
@@ -24,15 +16,16 @@ export const adConfigurations: AdConfiguration[] = [
       records: [
         {
           adSystemDomain: "google.com",
-          publisherId:"pub-4387421502552077",
+          publisherId: "pub-4387421502552077",
           relationship: "DIRECT",
           certificationAuthorityId: "f08c47fec0942fa0",
           comment: "Google AdMob - primary network",
         },
       ],
-      lastUpdated: "",
-      verificationStatus: "Not Configured",
-      notes: "Publisher ID has not been entered yet.",
+      lastUpdated: "2026-09-16",
+      verificationStatus: "Pending Verification",
+      notes:
+        "Google AdMob publisher configured for Indian Open World Driving. Awaiting AdMob verification.",
     },
     draft: {
       records: [],
@@ -44,7 +37,15 @@ export const adConfigurations: AdConfiguration[] = [
     productSlug: "businesskit",
     enabled: false,
     provider: "",
-    production: { records: [], lastUpdated: "", verificationStatus: "Not Configured" },
-    draft: { records: [], lastUpdated: "", verificationStatus: "Not Configured" },
+    production: {
+      records: [],
+      lastUpdated: "",
+      verificationStatus: "Not Configured",
+    },
+    draft: {
+      records: [],
+      lastUpdated: "",
+      verificationStatus: "Not Configured",
+    },
   },
 ];
