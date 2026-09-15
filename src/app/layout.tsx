@@ -25,6 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     formatDetection: { telephone: false },
     appleWebApp: { title: config.brand.shortName, capable: false },
+    verification: {
+      google: "O0xdRWKaz0Pg5_vbJrtcl6CYDdU8Z2f5-g728kwTfAs",
+    },
   };
 }
 
