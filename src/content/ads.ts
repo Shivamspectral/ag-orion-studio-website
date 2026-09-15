@@ -24,7 +24,7 @@ export const adConfigurations: AdConfiguration[] = [
       records: [
         {
           adSystemDomain: "google.com",
-          publisherId: "", // EDIT: pub-XXXXXXXXXXXXXXXX
+          publisherId:"pub-4387421502552077",
           relationship: "DIRECT",
           certificationAuthorityId: "f08c47fec0942fa0",
           comment: "Google AdMob - primary network",
